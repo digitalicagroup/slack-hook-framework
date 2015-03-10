@@ -1,0 +1,24 @@
+{
+    "name": "digitalicagroup/slack-hook-framework",
+    "description": "Framework to easily create your own command processor for Slack",
+    "homepage": "https://github.com/digitalicagroup/slack-hook-framework",
+    "type": "project",
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "katzgrau/klogger": "1.0.*"
+    },
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Luis Augusto Peña Pereira",
+            "email": "luis@digitalicagroup.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "SlackHookFramework\\": "lib/"
+      },
+      "classmap": ["lib/"]
+    }
+}
