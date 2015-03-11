@@ -1,6 +1,6 @@
 <?php
 
-namespace Bot;
+namespace SlackHookFramework;
 
 use Katzgrau\KLogger\Logger;
 
@@ -36,7 +36,7 @@ class Util {
 	/**
 	 * Locates (using slack api) the channel name of a given channel id.
 	 *
-	 * @param \Bot\Configuration $config        	
+	 * @param \SlackHookFramework\Configuration $config        	
 	 * @param string $channelId
 	 *        	slack channel id to be found.
 	 * @return string
@@ -89,52 +89,6 @@ class Util {
 		return "#" . $channel;
 	}
 	
-	/**
-	 * Converts an array representation of an issue (as returned by the php-redmine-api) to an
-	 * instance of SlackResultAttachment to be used in messages sent to a slack incoming webhook.
-	 *
-	 * @param string $redmine_issues_url        	
-	 * @param string $issue_id        	
-	 * @param array $issue        	
-	 * @return \Bot\SlackResultAttachment
-	 * @see \Bot\SlackResultAttachment
-	 * @link https://github.com/kbsali/php-redmine-api
-	 */
-	public static function convertIssueToAttachment($redmine_issues_url, $issue_id, $issue) {
-		$attachment = new SlackResultAttachment ();
-		$attachment->setTitle ( "#" . $issue_id . " " . $issue ['issue'] ['subject'] );
-		$attTitle = "[<" . $redmine_issues_url . $issue_id . "|" . $issue ['issue'] ['tracker'] ['name'] . " #" . $issue_id . ">]";
-		$attachment->setPretext ( $attTitle );
-		$attachment->setTitle ( $issue ['issue'] ['subject'] );
-		$attachment->setText ( $issue ["issue"] ["description"] );
-		$fixed_version = "None";
-		if (isset ( $issue ["issue"] ["fixed_version"] ["name"] )) {
-			$fixed_version = $issue ["issue"] ["fixed_version"] ["name"];
-		}
-		$estimated_hours = "None";
-		if (isset ( $issue ["issue"] ["estimated_hours"] )) {
-			$estimated_hours = $issue ["issue"] ["estimated_hours"];
-		}
-		$assigned_to = "None";
-		if (isset ( $issue ["issue"] ["assigned_to"] ["name"] )) {
-			$assigned_to = $issue ["issue"] ["assigned_to"] ["name"];
-		}
-		$fields = array ();
-		$fields [] = self::createField ( "Project", $issue ["issue"] ["project"] ["name"] );
-		$fields [] = self::createField ( "Version", $fixed_version );
-		$fields [] = self::createField ( "Status", $issue ["issue"] ["status"] ["name"] );
-		$fields [] = self::createField ( "Priority", $issue ["issue"] ["priority"] ["name"] );
-		$fields [] = self::createField ( "Assigned To", $assigned_to );
-		$fields [] = self::createField ( "Author", $issue ["issue"] ["author"] ["name"] );
-		$fields [] = self::createField ( "Start Date", $issue ["issue"] ["start_date"] );
-		$fields [] = self::createField ( "Estimated Hours", $estimated_hours );
-		$fields [] = self::createField ( "Done Ratio", $issue ["issue"] ["done_ratio"] . "%" );
-		$fields [] = self::createField ( "Spent Hours", $issue ["issue"] ["spent_hours"] );
-		$fields [] = self::createField ( "Created On", $issue ["issue"] ["created_on"] );
-		$fields [] = self::createField ( "Updated On", $issue ["issue"] ["updated_on"] );
-		$attachment->setFieldsArray ( $fields );
-		return $attachment;
-	}
 	protected static function createField($title, $value, $short = true) {
 		$field = new SlackResultAttachmentField ();
 		$field->setTitle ( $title );

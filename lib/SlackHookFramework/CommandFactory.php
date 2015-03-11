@@ -1,6 +1,6 @@
 <?php
 
-namespace Bot;
+namespace SlackHookFramework;
 
 use Katzgrau\KLogger\Logger;
 
@@ -22,9 +22,9 @@ class CommandFactory {
 	 *
 	 * @param array $post
 	 *        	Reference to $_POST
-	 * @param \Bot\Configuration $config
+	 * @param \SlackHookFramework\Configuration $config
 	 *        	Configuration instance with parameters.
-	 * @return \Bot\AbstractCommand Returns an instance of an AbstractCommand subclass.
+	 * @return \SlackHookFramework\AbstractCommand Returns an instance of an AbstractCommand subclass.
 	 */
 	public static function create($post, $config) {
 		$cmd = new CmdUnknown ( $post, $config );

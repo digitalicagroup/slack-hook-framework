@@ -1,6 +1,6 @@
 <?php
 
-namespace Bot;
+namespace SlackHookFramework;
 
 use Katzgrau\KLogger\Logger;
 
@@ -17,7 +17,7 @@ class Validator {
 	 * 
 	 * @param array $post
 	 *        	reference to the $_POST parameters.
-	 * @param \Bot\Configuration $configuration        	
+	 * @param \SlackHookFramework\Configuration $configuration        	
 	 * @return boolean
 	 */
 	public static function validate($post, $configuration) {

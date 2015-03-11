@@ -1,6 +1,6 @@
 <?php
 
-namespace Bot;
+namespace SlackHookFramework;
 
 use Katzgrau\KLogger\Logger;
 use Psr\Log\LogLevel;
@@ -22,7 +22,7 @@ abstract class AbstractCommand {
 	/**
 	 * Configuration parameters.
 	 *
-	 * @var Bot\Configuraton
+	 * @var SlackHookFramework\Configuraton
 	 */
 	protected $config;
 	
@@ -54,7 +54,7 @@ abstract class AbstractCommand {
 	/**
 	 * Result of executing the command.
 	 *
-	 * @var Bot\SlackResult
+	 * @var SlackHookFramework\SlackResult
 	 */
 	private $result;
 	
@@ -63,7 +63,7 @@ abstract class AbstractCommand {
 	 *
 	 * @param array $post
 	 *        	Reference to $_POST parameters.
-	 * @param Bot\Configuration $config
+	 * @param SlackHookFramework\Configuration $config
 	 *        	Configuration parameters.
 	 * @param array $arr
 	 *        	String array containing this command input parameters.
@@ -87,7 +87,7 @@ abstract class AbstractCommand {
 	 * Executes this command, and returns a new SlackResult instance.
 	 * TODO move channel_id string to global config.
 	 *
-	 * @return \Bot\SlackResult
+	 * @return \SlackHookFramework\SlackResult
 	 */
 	public function execute() {
 		$this->log->debug ( "AbstractCommand (" . get_class ( $this ) . "): command array: {" . implode ( ",", $this->cmd ) . "}" );

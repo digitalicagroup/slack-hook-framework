@@ -1,6 +1,6 @@
 <?php
 
-namespace Bot;
+namespace SlackHookFramework;
 
 // TODO move constants to a global configuration
 define ( 'R_TEXT', 'text' );
@@ -60,7 +60,7 @@ abstract class AbstractArray {
 	 *
 	 * @param string $key        	
 	 * @param array $objs_array
-	 *        	array of \Bot\AbstractArray (subclasses) instances.
+	 *        	array of \SlackHookFramework\AbstractArray (subclasses) instances.
 	 */
 	public function setArray($key, $objs_array) {
 		$this->a [$key] = array ();

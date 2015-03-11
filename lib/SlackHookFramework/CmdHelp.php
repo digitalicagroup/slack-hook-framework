@@ -1,6 +1,6 @@
 <?php
 
-namespace Bot;
+namespace SlackHookFramework;
 
 /**
  * Class to parse help data (loaded by CommandFactory) into a SlackResult instance
@@ -29,7 +29,7 @@ class CmdHelp extends AbstractCommand {
 			}
 		}
 		usort ( $fields, array (
-				"Bot\SlackResultAttachmentField",
+				"SlackHookFramework\SlackResultAttachmentField",
 				"compare" 
 		) );
 		$att->setFieldsArray ( $fields );
