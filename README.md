@@ -26,7 +26,7 @@ How does it work? (stand alone)
 * PHP >= 5.4 with cURL extension,
 * Slack integrations (see install).
 
-## Install (composer)
+## Install (as library)
 Just add the dependency for slack-hook-framework or run:
 ```bash
 $ php composer.phar require digitalicagroup/slack-hook-framework:~0.1
@@ -39,12 +39,12 @@ If you want to install the framework in stand alone mode and begin working direc
 
 * Create a new "Slash Commands" integration with the following data:
  * Command: /test (or whatever you like)
- * URL: the URL pointing to the index.php of your slack-bot install
+ * URL: the URL pointing to the index.php of your slack-hook-framework install
  * Method: POST
  * Token: copy this token, we'll need it later.
 
 * Create a new "Incoming WebHooks" slack integration:
- * Post to Channel: Pick one, but this will be ignored by slack-bot.
+ * Post to Channel: Pick one, but this will be ignored by slack-hook-framework.
  * Webhook URL: copy this URL, we'll need it later.
  * Descriptive Label, Customize Name, Customize Icon: whatever you like.
 
@@ -91,7 +91,7 @@ $config->log_dir =            "/srv/api/slack-hook-framework/logs";
  * Database folder, used by some commands to store user related temporal information.
  * Make sure the invoker have write permission.
  */
-$config->db_dir = "/srv/api/slack-framework/db";
+$config->db_dir = "/srv/api/slack-hook-framework/db";
 ```
 
 Give permissions to your logs/ and db/ folder to your web server process. If you are using apache under linux, it is usually www-data:
@@ -115,13 +115,13 @@ Go to slack and type `/test help`.
 
 This is a list of common errors:
 * "I see some errors about permissions in the apache error log".
- * The process running slack-bot (usually the web server) needs write permissions to the folder configured in you $config->log_dir parameter.
+ * The process running slack-hook-framework (usually the web server) needs write permissions to the folder configured in you $config->log_dir parameter.
  * For example, if you are running apache, that folder group must be assigned to www-data and its write permission for groups must be turned on.
   * change to your slack-hook-framework dir
   * chown -R :www-data logs/
   * chmod -R g+w logs/
 * "I followed the steps and nothing happens, nothing in web server error log and nothing in the app log".
- * If you see nothing in the logs (and have the debug level setted), may be the app is dying in the process of validating the slack token. slack-bot validates that the request matches with the configured token or the app dies at the very beginning.
+ * If you see nothing in the logs (and have the debug level setted), may be the app is dying in the process of validating the slack token. slack-hook-framework validates that the request matches with the configured token or the app dies at the very beginning.
 * "There is no error in the web server error log, I see some output in the app log (with the debug log level), but i get nothing in my channel/group".
  * Check in the app log for the strings "[DEBUG] Util: group found!" or "[DEBUG] Util: channel found!" . If you can't see those strings, check if your slack authentication token for your team is from an user that have access to the private group you are writing from. 
 * I just developed a new command but I am getting a class not found error on CommandFactory.
@@ -132,5 +132,5 @@ This is a list of common errors:
 ## About Digitalica
 
 We are a small firm focusing on mobile apps development (iOS, Android) and we are passionate about new technologies and ways that helps us work better.
-* This project homepage: [slack-bot](https://github.com/digitalicagroup/slack-bot)
+* This project homepage: [slack-hook-framework](https://github.com/digitalicagroup/slack-hook-framework)
 * Digitalica homepage: [digitalicagroup.com](http://digitalicagroup.com)
