@@ -22,9 +22,9 @@
       "classmap": ["lib/"]
     },
     "scripts": {
-        "post-update-cmd": "SlackHookFramework\\Installer::postUpdate",
-        "post-package-update": [
-            "SlackHookFramework\\Installer::postPackageUpdate"
+        "post-update-cmd": [
+        	"php -r \"copy('vendor/digitalicagroup/slack-hook-framework/custom_cmds.json', 'custom_cmds.json');\"",
+        	"php -r \"copy('vendor/digitalicagroup/slack-hook-framework/index-example.php', 'index-example.php');\""
         ]
     }
 }
