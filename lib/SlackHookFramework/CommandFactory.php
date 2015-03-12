@@ -15,6 +15,7 @@ use Katzgrau\KLogger\Logger;
 class CommandFactory {
 	protected static $classes = null;
 	protected static $help_data = null;
+	protected static $log = null;
 	
 	/**
 	 * Factory method to create command instances.
@@ -28,21 +29,16 @@ class CommandFactory {
 	 */
 	public static function create($post, $config) {
 		$cmd = new CmdUnknown ( $post, $config );
-		$log = new Logger ( $config->log_dir, $config->log_level );
-		$log->debug ( "CommandFactory: post received (json encoded): " . json_encode ( $post ) );
+		self::$log = new Logger ( $config->log_dir, $config->log_level );
+		self::$log->debug ( "CommandFactory: post received (json encoded): " . json_encode ( $post ) );
 		
 		// checking if commands definitions have been loaded
 		if (self::$classes == null || self::$help_data == null) {
-			$result = self::reloadDefinitions ();
-			if ($result) {
-				$log->debug ( "CommandFactory: commands_definition.json loaded" );
-			} else {
-				$log->error ( "CommandFactory: Error loading commands_definition.json, check json format or file permissions." );
-			}
+			self::reloadDefinitions ();
 		}
 		// TODO move strings parameter 'text' to global definition
 		if (isset ( $post ['text'] ) && self::$classes != null) {
-			$log->debug ( "CommandFactory: text received: " . $post ['text'] );
+			self::$log->debug ( "CommandFactory: text received: " . $post ['text'] );
 			// parsing inputs by space
 			$input = preg_split ( "/[\s]+/", $post ['text'] );
 			// the first word represents the command
@@ -56,16 +52,36 @@ class CommandFactory {
 	}
 	
 	/**
-	 * Read command definitions from commands_definition.json.
+	 * Read command definitions from commands_definition.json and custom commands.
 	 *
 	 * @return boolean returns false if json could not be loaded, true otherwise.
 	 */
 	public static function reloadDefinitions() {
+		// Load default commands definitions
+		$result = self::reloadFileDefinitions ( __DIR__ . "/commands_definition.json" );
+		if ($result) {
+			self::$log->debug ( "CommandFactory: default commands_definition.json loaded" );
+		} else {
+			self::$log->error ( "CommandFactory: Error loading default commands_definition.json, check json format or file permissions." );
+		}
+		
+		// Load custom commands definitions
+		$filename = __DIR__ . "../../../../../custom_cmds.json";
+		$result = self::reloadFileDefinitions ( $filename );
+		if ($result) {
+			self::$log->debug ( "CommandFactory: custom commands $filename loaded" );
+		} else {
+			self::$log->error ( "CommandFactory: Error loading custom commands from $filename, check json format or file permissions." );
+		}
+	}
+	protected static function reloadFileDefinitions($file, $clean_previous = TRUE) {
 		$result = false;
-		$json = json_decode(preg_replace('/.+?({.+}).+/','$1',utf8_encode(file_get_contents ( __DIR__."/commands_definition.json" ))), true);
+		$json = json_decode ( preg_replace ( '/.+?({.+}).+/', '$1', utf8_encode ( file_get_contents ( $file ) ) ), true );
 		if ($json != null) {
-			self::$classes = array ();
-			self::$help_data = array ();
+			if ($clean_previous) {
+				self::$classes = array ();
+				self::$help_data = array ();
+			}
 			foreach ( $json ["commands"] as $command ) {
 				self::$classes [$command ["trigger"]] = $command ["class"];
 				self::$help_data [$command ["help_title"]] = $command ["help_text"];
@@ -74,10 +90,9 @@ class CommandFactory {
 		}
 		return $result;
 	}
-	
 	public static function getHelpData() {
 		if (self::$help_data == null) {
-			self::reloadDefinitions();
+			self::reloadDefinitions ();
 		}
 		return self::$help_data;
 	}

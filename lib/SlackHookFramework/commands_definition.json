@@ -1,12 +1,6 @@
 {
 	"commands": [
 		{
-			"trigger": "hello",
-			"class": "SlackHookFramework\\CmdHello",
-			"help_title": "hello",
-			"help_text": "Shows how to use the slack-hook-framework"
-		},
-		{
 			"trigger": "help",
 			"class": "SlackHookFramework\\CmdHelp",
 			"help_title": "help",
