@@ -20,7 +20,7 @@
         "SlackHookFramework\\": "lib/"
       },
       "classmap": ["lib/"]
-    }
+    },
     "scripts": {
         "post-update-cmd": "SlackHookFramework\\Installer::postUpdate",
         "post-package-update": [
