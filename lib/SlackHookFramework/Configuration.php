@@ -16,6 +16,7 @@ class Configuration {
   public $default_channel;
   public $log_dir;
   public $db_dir;
+  public $custom_cmds;
 
   public function __construct () {
     $this->token = null;
@@ -27,6 +28,7 @@ class Configuration {
     $this->default_channel = null;
     $this->log_dir = "../../logs";
     $this->db_dir = "../../db";
+    $this->custom_cmds = "../../custom_cmds.json";
   }
 }
 

@@ -34,7 +34,7 @@ class CommandFactory {
 		
 		// checking if commands definitions have been loaded
 		if (self::$classes == null || self::$help_data == null) {
-			self::reloadDefinitions ();
+			self::reloadDefinitions ($config);
 		}
 		// TODO move strings parameter 'text' to global definition
 		if (isset ( $post ['text'] ) && self::$classes != null) {
@@ -56,7 +56,7 @@ class CommandFactory {
 	 *
 	 * @return boolean returns false if json could not be loaded, true otherwise.
 	 */
-	public static function reloadDefinitions() {
+	public static function reloadDefinitions($config) {
 		// Load default commands definitions
 		$result = self::reloadFileDefinitions ( __DIR__ . "/commands_definition.json" );
 		if ($result) {
@@ -66,12 +66,12 @@ class CommandFactory {
 		}
 		
 		// Load custom commands definitions
-		$filename = __DIR__ . "../../../../../custom_cmds.json";
+		$filename = $config->custom_cmds;
 		$result = self::reloadFileDefinitions ( $filename );
 		if ($result) {
 			self::$log->debug ( "CommandFactory: custom commands $filename loaded" );
 		} else {
-			self::$log->error ( "CommandFactory: Error loading custom commands from $filename, check json format or file permissions." );
+			self::$log->warning ( "CommandFactory: Warning . Could not load custom commands from $filename, check json format or file permissions." );
 		}
 	}
 	protected static function reloadFileDefinitions($file, $clean_previous = TRUE) {

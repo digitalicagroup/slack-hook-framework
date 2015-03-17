@@ -36,21 +36,26 @@ $config->slack_api_token = "xoxp-98475983759834-38475984579843-34985793845";
 // $config->log_level = LogLevel::WARNING;
 
 /**
- * logs folder, make sure the invoker have write permission.
+ * logs folder, make sure the invoker(*) have write permission.
  */
 $config->log_dir = "/srv/api/slack-hook-framework/logs";
 
 /**
  * Database folder, used by some commands to store user related temporal information.
- * Make sure the invoker have write permission.
+ * Make sure the invoker(*) have write permission.
  */
 $config->db_dir = "/srv/api/slack-hook-framework/db";
 
 /**
- * This is to prevent redmine-command entry point to be called outside slack.
- * If you want it to be called from anywhere, comment the following 3 lines:
+ * Custom commands definition. Use this file if you wish to add new commands to be
+ * recognized by the framework.
  */
+$config->custom_cmds = "/srv/api/slack-hook-framework/custom_cmds.json";
 
+/**
+ * This is to prevent redmine-command entry point to be called outside slack.
+ * It will validate the slack token.
+ */
 if (! SlackHookFramework\Validator::validate ( $_POST, $config )) {
 	die ();
 }
@@ -61,3 +66,12 @@ if (! SlackHookFramework\Validator::validate ( $_POST, $config )) {
 $command = SlackHookFramework\CommandFactory::create ( $_POST, $config );
 $command->execute ();
 $command->post ();
+
+/**
+ * (*) Give permissions to your logs/ and db/ folder to your web server process.
+ * If you are using apache under linux, it is usually www-data:
+ * sudo chown -R :www-data logs/
+ * sudo chown -R :www-data db/
+ * sudo chmod g+w logs/
+ * sudo chmod g+w db/
+ */
