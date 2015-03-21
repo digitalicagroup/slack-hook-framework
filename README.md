@@ -4,21 +4,21 @@ A simple framework to build your own command processor for Slack.
 It can be extended in two ways:
 * Creating another project and using composer to install the framework as a library.
  * See [slack-bot](https://github.com/digitalicagroup/slack-bot) for an example of what can be done.
-* Install the framework in stand alone mode (see Install) and start adding new commands right away.
+* Install the framework and start adding new commands right away.
 
 Uses
 * One Slack "Slash Commands" and one "Incoming WebHooks" integration (see Install).
 * [php-redmine-api](https://github.com/kbsali/php-redmine-api)
 * [KLogger](https://github.com/katzgrau/KLogger)
 
-How does it work? (stand alone)
+How does it work?
 * It installs as a PHP application on your web server.
 * Through a "Slash Commands" Slack integration, it receives requests.
 * Posts the results to an "Incoming WebHooks" Slack integration in the originator's channel or private group (yeah, private group!).
 
 ## Current Features
 * Commands supported:
- * help: Shows help info about other commands. It gathers information from the commands_definition.json file.
+ * help: Shows help info about other commands. It gathers information from custom_cmds.json (file for user defined commands).
  * hello: Example command that shows what can be done with the framework.
  
 ## Requirements
@@ -26,7 +26,7 @@ How does it work? (stand alone)
 * PHP >= 5.4 with cURL extension,
 * Slack integrations (see install).
 
-## Install (as library)
+## Install
 Just add the dependency for slack-hook-framework or run:
 ```bash
 $ php composer.phar require digitalicagroup/slack-hook-framework:~0.1
@@ -37,14 +37,11 @@ $ cp vendor/digitalicagroup/slack-hook-framework/custom_cmds.json .
 View the index-example.php to see how to configure the library and how to invoke the command processor.
 The customs_cmds.json will let you define new commands of your own. You can check vendor/digitalicagroup/slack-hook-framework/lib/SlackHookFramework/CmdHello.php to see what a command should do.
 
-## Install (stand alone)
-If you want to install the framework in stand alone mode and begin working directly over it, follow this steps:
-
 ### On Slack
 
 * Create a new "Slash Commands" integration with the following data:
  * Command: /test (or whatever you like)
- * URL: the URL pointing to the index.php of your slack-hook-framework install
+ * URL: the URL pointing to the index.php (or index-example.php) of your slack-hook-framework install
  * Method: POST
  * Token: copy this token, we'll need it later.
 
@@ -53,7 +50,10 @@ If you want to install the framework in stand alone mode and begin working direc
  * Webhook URL: copy this URL, we'll need it later.
  * Descriptive Label, Customize Name, Customize Icon: whatever you like.
 
-* Go to [Slack API](https://api.slack.com/) and copy the authentication token for your team.
+* Go to [Slack API](https://api.slack.com/) and copy the authentication token for your team. The framework needs this because:
+ * When a command is received from Slack (in a private group), the payload does not have the private group name.
+ * It needs to make a request to the Slack API in order to search for the group name.
+ * If the authentication token have the rights to access that group, the framework will be able to post to it.
 
 ### On your web server
 
@@ -118,14 +118,14 @@ Go to slack and type `/test help`.
 
 ## Adding more Commands.
 
-* If You wish to add more commands: 
+* If You wish to add more commands (copy the custom_cmds.json file, unles you did that already).
 ```bash
 $ cp vendor/digitalicagroup/slack-hook-framework/custom_cmds.json .
 ```
 * Add a definition for your new class to custom_cmds.json .
-* Check you have defined a $config->custom_cmds to the framework configuration.
-* Check the contents of vendor/digitalicagroup/slack-hook-framework/lib/SlackHookFramework/CmdHello.php to see what a command can do.
-* run composer update (php composer.phar update).
+* Check you have defined a `$config->custom_cmds` in the framework configuration (i.e. `index-example.php`).
+* Check the contents of `vendor/digitalicagroup/slack-hook-framework/lib/SlackHookFramework/CmdHello.php` to see what a command can do.
+* run composer update (`php composer.phar update`).
 
 ## Troubleshooting
 
@@ -137,12 +137,12 @@ This is a list of common errors:
   * chown -R :www-data logs/
   * chmod -R g+w logs/
 * "I followed the steps and nothing happens, nothing in web server error log and nothing in the app log".
- * If you see nothing in the logs (and have the debug level setted), may be the app is dying in the process of validating the slack token. slack-hook-framework validates that the request matches with the configured token or the app dies at the very beginning.
+ * If you see nothing in the logs (and have the debug level setted), may be the app is dying in the process of validating the slack token. slack-hook-framework validates that the request matches with the configured slack token or the app dies at the very beginning.
 * "There is no error in the web server error log, I see some output in the app log (with the debug log level), but i get nothing in my channel/group".
- * Check in the app log for the strings "[DEBUG] Util: group found!" or "[DEBUG] Util: channel found!" . If you can't see those strings, check if your slack authentication token for your team is from an user that have access to the private group you are writing from. 
+ * Check in the app log for the strings "[DEBUG] Util: group found!" or "[DEBUG] Util: channel found!" . If you can't see those strings, check if the slack authentication token for your team is from an user that have access to the private group you are writing from. 
 * I just developed a new command but I am getting a class not found error on CommandFactory.
- * Every time you add a new command (hence a new class), you must update the composer autoloader. just type:
- * php composer.phar update  
+ * Every time you add a new command (hence a new class), you must update the composer autoloader; just type:
+ * `php composer.phar update`  
 * If you have any bug or error to report, feel free to contact me:  luis at digitalicagroup.com
 
 ## About Digitalica
