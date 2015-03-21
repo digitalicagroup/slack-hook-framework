@@ -67,7 +67,7 @@ class CommandFactory {
 		
 		// Load custom commands definitions
 		$filename = $config->custom_cmds;
-		$result = self::reloadFileDefinitions ( $filename );
+		$result = self::reloadFileDefinitions ( $filename , FALSE);
 		if ($result) {
 			self::$log->debug ( "CommandFactory: custom commands $filename loaded" );
 		} else {
