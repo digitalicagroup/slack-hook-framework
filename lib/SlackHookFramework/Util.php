@@ -89,7 +89,15 @@ class Util {
 		return "#" . $channel;
 	}
 	
-	protected static function createField($title, $value, $short = true) {
+	/**
+	 * Returns a \SlackHookFramework\SlackResultAttachmentField instance with the given values.
+	 * @param string $title
+	 * @param string $value
+	 * @param boolean $short If true, returns a "short" field. Slack can render two short fields
+	 *  in two columns, or a "long" field ($short = false) in a single column.
+	 * @return \SlackHookFramework\SlackResultAttachmentField
+	 */
+	public static function createField($title, $value, $short = true) {
 		$field = new SlackResultAttachmentField ();
 		$field->setTitle ( $title );
 		$field->setValue ( $value );
