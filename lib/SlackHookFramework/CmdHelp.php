@@ -29,7 +29,7 @@ class CmdHelp extends AbstractCommand {
 			}
 		}
 		usort ( $fields, array (
-				"SlackHookFramework\SlackResultAttachmentField",
+				"SlackHookFramework\\SlackResultAttachmentField",
 				"compare" 
 		) );
 		$att->setFieldsArray ( $fields );
