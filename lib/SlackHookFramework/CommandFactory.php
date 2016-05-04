@@ -3,6 +3,7 @@
 namespace SlackHookFramework;
 
 use Katzgrau\KLogger\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class to handle input parameters parsing and command creation.
@@ -13,8 +14,20 @@ use Katzgrau\KLogger\Logger;
  *        
  */
 class CommandFactory {
+
+	/**
+	 * @var array|null
+	 */
 	protected static $classes = null;
+
+	/**
+	 * @var array|null
+	 */
 	protected static $help_data = null;
+
+	/**
+	 * @var LoggerInterface
+	 */
 	protected static $log = null;
 	
 	/**
@@ -40,7 +53,7 @@ class CommandFactory {
 		if (isset ( $post ['text'] ) && self::$classes != null) {
 			self::$log->debug ( "CommandFactory: text received: " . $post ['text'] );
 			// parsing inputs by space
-			$input = preg_split ( "/[\s]+/", $post ['text'] );
+			$input = preg_split ( "/[\\s]+/", $post ['text'] );
 			// the first word represents the command
 			if (in_array ( $input [0], array_keys ( self::$classes ) )) {
 				$class = self::$classes [$input [0]];

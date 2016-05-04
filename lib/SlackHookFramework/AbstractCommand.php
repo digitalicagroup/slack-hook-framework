@@ -3,7 +3,6 @@
 namespace SlackHookFramework;
 
 use Katzgrau\KLogger\Logger;
-use Psr\Log\LogLevel;
 
 /**
  * Abstract class to extend into other commands.
@@ -22,14 +21,14 @@ abstract class AbstractCommand {
 	/**
 	 * Configuration parameters.
 	 *
-	 * @var SlackHookFramework\Configuraton
+	 * @var Configuration
 	 */
 	protected $config;
 	
 	/**
 	 * Logger facility.
 	 *
-	 * @var Katzgrau\KLogger\Logger
+	 * @var Logger
 	 */
 	protected $log;
 	
@@ -54,7 +53,7 @@ abstract class AbstractCommand {
 	/**
 	 * Result of executing the command.
 	 *
-	 * @var SlackHookFramework\SlackResult
+	 * @var SlackResult
 	 */
 	private $result;
 	
@@ -63,7 +62,7 @@ abstract class AbstractCommand {
 	 *
 	 * @param array $post
 	 *        	Reference to $_POST parameters.
-	 * @param SlackHookFramework\Configuration $config
+	 * @param Configuration $config
 	 *        	Configuration parameters.
 	 * @param array $arr
 	 *        	String array containing this command input parameters.
@@ -118,7 +117,7 @@ abstract class AbstractCommand {
 		$this->log->debug ( "AbstractCommand (" . get_class ( $this ) . "): response json: $json" );
 		$result = Util::post ( $this->config->slack_webhook_url, $json );
 		if (! $result) {
-			$log->error ( "AbstractCommand: Error sending json: $json to slack hook: " . $this->config->slack_webhook_url );
+			$this->log->error ( "AbstractCommand: Error sending json: $json to slack hook: " . $this->config->slack_webhook_url );
 		}
 		return $result;
 	}
