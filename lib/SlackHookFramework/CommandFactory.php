@@ -56,16 +56,16 @@ class CommandFactory {
 		if (isset ( $post ['text'] ) && self::$commands != null) {
 			self::$log->debug ( "CommandFactory: text received: " . $post ['text'] );
 			// the first word represents the command
-			if (in_array ( $input [0], array_keys ( self::$commands ) )) {
-				$class = self::$commands [$input [0]] ["class"];
-				$split_regexp = "/[\\s]+/";
-				if (isset ( self::$commands [$input [0]] ["split_regexp"] )) {
-					$split_regexp = self::$commands [$input [0]] ["split_regexp"];
+			$split_regexp = "/[\\s]+/";
+			$input = preg_split ( $split_regexp, $post ['text'] );
+			$command_string = $input [0];
+			array_shift ( $input );
+			if (in_array ( $command_string, array_keys ( self::$commands ) )) {
+				$class = self::$commands [$command_string] ["class"];
+				if (isset ( self::$commands [$command_string] ["split_regexp"] )) {
+					$split_regexp = self::$commands [$command_string] ["split_regexp"];
+					$input = preg_split ( $split_regexp, implode ( " ", $input ) );
 				}
-				
-				// parsing inputs by space
-				$input = preg_split ( $split_regexp, $post ['text'] );
-				array_shift ( $input );
 				
 				$cmd = new $class ( $post, $config, $input );
 			}
