@@ -4,7 +4,9 @@
 			"trigger": "hello",
 			"class": "SlackHookFramework\\CmdHello",
 			"help_title": "hello",
-			"help_text": "Hello World!. Shows how to use the slack-hook-framework"
+			"help_text": "Hello World!. Shows how to use the slack-hook-framework",
+			"split_regexp": "/[\\s]+/",
+			"comment": "split_regexp is an optional field, '/[\\s]+/' (one or more spaces) will be used as default"
 		}
 	]
 }
