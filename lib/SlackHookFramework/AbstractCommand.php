@@ -2,9 +2,6 @@
 
 namespace SlackHookFramework;
 
-use SlackHookFramework\SlackResult;
-use SlackHookFramework\SlackResultAttachment;
-use SlackHookFramework\SlackResultAttachmentField;
 use Katzgrau\KLogger\Logger;
 
 /**
@@ -58,7 +55,7 @@ abstract class AbstractCommand {
 	 *
 	 * @var SlackResult
 	 */
-	private $result;
+	protected $result;
 	
 	/**
 	 * Construtor.
@@ -77,8 +74,8 @@ abstract class AbstractCommand {
 		$this->cmd = $arr;
 		$this->response_to_source_channel = true;
 		$this->result = new SlackResult ();
-		$attTest = new SlackResultAttachment();
-		$attTest = new SlackResultAttachmentField();
+		$attTest = new SlackResultAttachment ();
+		$attTest = new SlackResultAttachmentField ();
 	}
 	
 	/**
@@ -95,7 +92,7 @@ abstract class AbstractCommand {
 	 */
 	public function execute() {
 		$this->log->debug ( "AbstractCommand (" . get_class ( $this ) . "): command array: {" . implode ( ",", $this->cmd ) . "}" );
-		$this->result = $this->executeImpl ();
+		$this->executeImpl ();
 		
 		if ($this->response_to_source_channel) {
 			$this->log->debug ( "AbstractCommand (" . get_class ( $this ) . "): requesting channel name for channel: " . $this->post ["channel_id"] );
@@ -125,5 +122,43 @@ abstract class AbstractCommand {
 			$this->log->error ( "AbstractCommand: Error sending json: $json to slack hook: " . $this->config->slack_webhook_url );
 		}
 		return $result;
+	}
+	
+	/**
+	 * Sets the text field of the slack response, it will be rendered before
+	 * any attachment.
+	 *
+	 * @param String $text        	
+	 */
+	protected function setResultText($text) {
+		$this->result->setText ( $text );
+	}
+	
+	/**
+	 * Overrides the entire result of this command.
+	 *
+	 * @param SlackResult $result        	
+	 */
+	protected function setSlackResult($result) {
+		$this->result = $result;
+	}
+	
+	/**
+	 * Adds the parameter to the SlackResultAttachment array of this command's
+	 * internal SlackResult.
+	 *
+	 * @param SlackResultAttachment $att        	
+	 */
+	protected function addSlackResultAttachment($att) {
+		$this->result->toArray () [] = $att;
+	}
+	
+	/**
+	 * Returns a new instance of SlackResultAttachment.
+	 * 
+	 * @return \SlackHookFramework\SlackResultAttachment
+	 */
+	protected function createSlackResultAttachment() {
+		return new SlackResultAttachment ();
 	}
 }

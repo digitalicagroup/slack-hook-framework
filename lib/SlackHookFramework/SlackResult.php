@@ -71,7 +71,7 @@ abstract class AbstractArray {
 	
 	/**
 	 * Getter method for a specific value referenced by the given key.
-	 * 
+	 *
 	 * @param string $key        	
 	 */
 	public function getValue($key) {
