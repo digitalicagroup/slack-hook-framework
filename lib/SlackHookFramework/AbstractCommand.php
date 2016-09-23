@@ -2,6 +2,9 @@
 
 namespace SlackHookFramework;
 
+use SlackHookFramework\SlackResult;
+use SlackHookFramework\SlackResultAttachment;
+use SlackHookFramework\SlackResultAttachmentField;
 use Katzgrau\KLogger\Logger;
 
 /**
@@ -74,6 +77,8 @@ abstract class AbstractCommand {
 		$this->cmd = $arr;
 		$this->response_to_source_channel = true;
 		$this->result = new SlackResult ();
+		$attTest = new SlackResultAttachment();
+		$attTest = new SlackResultAttachmentField();
 	}
 	
 	/**
