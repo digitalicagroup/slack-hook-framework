@@ -91,7 +91,7 @@ class Util {
 	
 	/**
 	 * Returns a \SlackHookFramework\SlackResultAttachmentField instance with the given values.
-	 * 
+	 *
 	 * @param string $title        	
 	 * @param string $value        	
 	 * @param boolean $short
