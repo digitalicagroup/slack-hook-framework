@@ -6,15 +6,15 @@ use Katzgrau\KLogger\Logger;
 
 /**
  * Class to be used in the verification of a slack request.
- * 
- * @author Luis Augusto PeÃ±a Pereira <lpenap at gmail dot com>
+ *
+ * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
  *        
  */
 class Validator {
 	/**
 	 * It return whether or not a configured token matches with the token
 	 * received (from slack) in the $_POST parameters.
-	 * 
+	 *
 	 * @param array $post
 	 *        	reference to the $_POST parameters.
 	 * @param \SlackHookFramework\Configuration $configuration        	

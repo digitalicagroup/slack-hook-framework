@@ -10,22 +10,25 @@ use Psr\Log\LoggerInterface;
  * Aditional command classes must extend AbstractCommand and be
  * added to commands_definition.json
  *
- * @author Luis Augusto PeÃ±a Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
  *        
  */
 class CommandFactory {
-
+	
 	/**
+	 *
 	 * @var array|null
 	 */
 	protected static $classes = null;
-
+	
 	/**
+	 *
 	 * @var array|null
 	 */
 	protected static $help_data = null;
-
+	
 	/**
+	 *
 	 * @var LoggerInterface
 	 */
 	protected static $log = null;
@@ -47,7 +50,7 @@ class CommandFactory {
 		
 		// checking if commands definitions have been loaded
 		if (self::$classes == null || self::$help_data == null) {
-			self::reloadDefinitions ($config);
+			self::reloadDefinitions ( $config );
 		}
 		// TODO move strings parameter 'text' to global definition
 		if (isset ( $post ['text'] ) && self::$classes != null) {
@@ -80,13 +83,14 @@ class CommandFactory {
 		
 		// Load custom commands definitions
 		$filename = $config->custom_cmds;
-		$result = self::reloadFileDefinitions ( $filename , FALSE);
+		$result = self::reloadFileDefinitions ( $filename, FALSE );
 		if ($result) {
 			self::$log->debug ( "CommandFactory: custom commands $filename loaded" );
 		} else {
 			self::$log->warning ( "CommandFactory: Warning . Could not load custom commands from $filename, check json format or file permissions." );
 		}
 	}
+	
 	protected static function reloadFileDefinitions($file, $clean_previous = TRUE) {
 		$result = false;
 		$json = json_decode ( preg_replace ( '/.+?({.+}).+/', '$1', utf8_encode ( file_get_contents ( $file ) ) ), true );
@@ -103,6 +107,7 @@ class CommandFactory {
 		}
 		return $result;
 	}
+	
 	public static function getHelpData() {
 		if (self::$help_data == null) {
 			self::reloadDefinitions ();

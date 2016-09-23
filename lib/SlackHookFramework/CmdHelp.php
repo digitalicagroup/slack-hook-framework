@@ -6,14 +6,14 @@ namespace SlackHookFramework;
  * Class to parse help data (loaded by CommandFactory) into a SlackResult instance
  * containing all available commands into fields of a single attachment.
  *
- * @author Luis Augusto PeÃ±a Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
  *        
  */
 class CmdHelp extends AbstractCommand {
 	protected function executeImpl() {
 		$log = $this->log;
 		$result = new SlackResult ();
-		$result->setText ( "redmine-command help" );
+		$result->setText ( "Help" );
 		$att = new SlackResultAttachment ();
 		$att->setTitle ( "Available Commands:" );
 		$att->setFallback ( "Available Commands:" );
@@ -23,9 +23,9 @@ class CmdHelp extends AbstractCommand {
 		if ($help_data == null) {
 			$log->error ( "CmdHelp: Error loading help data, check commands_definition.json format or file permissions" );
 		} else {
-      $help_keys = array_keys ($help_data);
+			$help_keys = array_keys ( $help_data );
 			foreach ( $help_keys as $key ) {
-				$fields [] = SlackResultAttachmentField::withAttributes ( $key, $help_data[$key], false );
+				$fields [] = SlackResultAttachmentField::withAttributes ( $key, $help_data [$key], false );
 			}
 		}
 		usort ( $fields, array (

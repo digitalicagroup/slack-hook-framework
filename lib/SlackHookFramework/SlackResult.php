@@ -18,7 +18,7 @@ define ( 'R_CHANNEL', 'channel' );
 /**
  * Abstract wrapper class for an array.
  *
- * @author Luis Augusto PeÃ±a Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
  *        
  */
 abstract class AbstractArray {
@@ -71,14 +71,15 @@ abstract class AbstractArray {
 	
 	/**
 	 * Getter method for a specific value referenced by the given key.
-	 * @param string $key
+	 * 
+	 * @param string $key        	
 	 */
-	public function getValue ($key) {
-    if (isset ($this->a[$key])) {
-		  return $this->a[$key];
-    } else {
-      return NULL;
-    }
+	public function getValue($key) {
+		if (isset ( $this->a [$key] )) {
+			return $this->a [$key];
+		} else {
+			return NULL;
+		}
 	}
 }
 
@@ -160,12 +161,12 @@ class SlackResultAttachment extends AbstractArray {
  *        
  */
 class SlackResultAttachmentField extends AbstractArray {
-	public static function withAttributes ($title, $value, $isShort = true) {
-		$instance = new self();
-    $instance->setTitle ($title);
-    $instance->setValue ($value);
-    $instance->setShort ($isShort);
-    return $instance;
+	public static function withAttributes($title, $value, $isShort = true) {
+		$instance = new self ();
+		$instance->setTitle ( $title );
+		$instance->setValue ( $value );
+		$instance->setShort ( $isShort );
+		return $instance;
 	}
 	public function setTitle($title) {
 		$this->a [R_TITLE] = $title;
@@ -177,8 +178,8 @@ class SlackResultAttachmentField extends AbstractArray {
 		$this->a [R_SHORT] = $isShort;
 	}
 	public static function compare($a, $b) {
-		$al = strtolower ( $a->getValue(R_TITLE) );
-		$bl = strtolower ( $b->getValue(R_TITLE) );
+		$al = strtolower ( $a->getValue ( R_TITLE ) );
+		$bl = strtolower ( $b->getValue ( R_TITLE ) );
 		if ($al == $bl) {
 			return 0;
 		}

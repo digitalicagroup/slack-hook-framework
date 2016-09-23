@@ -8,7 +8,6 @@ It can be extended in two ways:
 
 Uses
 * One Slack "Slash Commands" and one "Incoming WebHooks" integration (see Install).
-* [php-redmine-api](https://github.com/kbsali/php-redmine-api)
 * [KLogger](https://github.com/katzgrau/KLogger)
 
 How does it work?

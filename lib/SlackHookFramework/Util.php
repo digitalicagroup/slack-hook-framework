@@ -7,7 +7,7 @@ use Katzgrau\KLogger\Logger;
 /**
  * Class to store utility methods.
  *
- * @author Luis Augusto PeÃ±a Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
  *        
  */
 class Util {
@@ -91,10 +91,12 @@ class Util {
 	
 	/**
 	 * Returns a \SlackHookFramework\SlackResultAttachmentField instance with the given values.
-	 * @param string $title
-	 * @param string $value
-	 * @param boolean $short If true, returns a "short" field. Slack can render two short fields
-	 *  in two columns, or a "long" field ($short = false) in a single column.
+	 * 
+	 * @param string $title        	
+	 * @param string $value        	
+	 * @param boolean $short
+	 *        	If true, returns a "short" field. Slack can render two short fields
+	 *        	in two columns, or a "long" field ($short = false) in a single column.
 	 * @return \SlackHookFramework\SlackResultAttachmentField
 	 */
 	public static function createField($title, $value, $short = true) {

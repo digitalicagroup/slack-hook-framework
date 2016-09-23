@@ -4,7 +4,7 @@
 			"trigger": "hello",
 			"class": "SlackHookFramework\\CmdHello",
 			"help_title": "hello",
-			"help_text": "Shows how to use the slack-hook-framework"
+			"help_text": "Hello World!. Shows how to use the slack-hook-framework"
 		}
 	]
 }

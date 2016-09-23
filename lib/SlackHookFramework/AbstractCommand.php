@@ -9,7 +9,7 @@ use Katzgrau\KLogger\Logger;
  * It stores the arguments, configuration, post parameters
  * and result.
  *
- * @author Luis Augusto PeÃ±a Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
  *        
  */
 abstract class AbstractCommand {
