@@ -59,8 +59,9 @@ class CommandFactory {
 			if (in_array ( $input [0], array_keys ( self::$commands ) )) {
 				$class = self::$commands [$input [0]] ["class"];
 				$split_regexp = "/[\\s]+/";
-				if (isset (self::$commands [$input [0]] ["split_regexp"])) {
+				if (isset ( self::$commands [$input [0]] ["split_regexp"] )) {
 					$split_regexp = self::$commands [$input [0]] ["split_regexp"];
+				}
 				
 				// parsing inputs by space
 				$input = preg_split ( $split_regexp, $post ['text'] );
@@ -95,7 +96,6 @@ class CommandFactory {
 			self::$log->warning ( "CommandFactory: Warning . Could not load custom commands from $filename, check json format or file permissions." );
 		}
 	}
-	
 	protected static function reloadFileDefinitions($file, $clean_previous = TRUE) {
 		$result = false;
 		$json = json_decode ( preg_replace ( '/.+?({.+}).+/', '$1', utf8_encode ( file_get_contents ( $file ) ) ), true );
@@ -113,7 +113,6 @@ class CommandFactory {
 		}
 		return $result;
 	}
-	
 	public static function getHelpData() {
 		if (self::$help_data == null) {
 			self::reloadDefinitions ();
