@@ -112,6 +112,9 @@ class SlackResult extends AbstractArray {
 	public function setChannel($channel) {
 		$this->a [R_CHANNEL] = $channel;
 	}
+	public function getAttachmentsArray() {
+		return $this->a[R_ATT];
+	}
 }
 
 /**

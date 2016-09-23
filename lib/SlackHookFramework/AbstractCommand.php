@@ -74,8 +74,6 @@ abstract class AbstractCommand {
 		$this->cmd = $arr;
 		$this->response_to_source_channel = true;
 		$this->result = new SlackResult ();
-		$attTest = new SlackResultAttachment ();
-		$attTest = new SlackResultAttachmentField ();
 	}
 	
 	/**
@@ -150,12 +148,13 @@ abstract class AbstractCommand {
 	 * @param SlackResultAttachment $att        	
 	 */
 	protected function addSlackResultAttachment($att) {
-		$this->result->toArray () [] = $att;
+		$atts = $this->result->getAttachmentsArray ();
+		$atts [] = $att;
 	}
 	
 	/**
 	 * Returns a new instance of SlackResultAttachment.
-	 * 
+	 *
 	 * @return \SlackHookFramework\SlackResultAttachment
 	 */
 	protected function createSlackResultAttachment() {
