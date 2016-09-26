@@ -52,7 +52,7 @@ class CommandFactory {
 		if (self::$commands == null || self::$help_data == null) {
 			self::reloadDefinitions ( $config );
 		}
-		self::$log->debug("Raw post: ". $post);
+		self::$log->debug ( "Raw post: " . $post );
 		
 		// TODO move strings parameter 'text' to global definition
 		if (isset ( $post ['text'] ) && self::$commands != null) {
@@ -108,7 +108,9 @@ class CommandFactory {
 			}
 			foreach ( $json ["commands"] as $command ) {
 				self::$commands [$command ["trigger"]] ["class"] = $command ["class"];
-				self::$commands [$command ["trigger"]] ["split_regexp"] = $command ["split_regexp"];
+				if (isset ( $command ["split_regexp"] )) {
+					self::$commands [$command ["trigger"]] ["split_regexp"] = $command ["split_regexp"];
+				}
 				self::$help_data [$command ["help_title"]] = $command ["help_text"];
 			}
 			$result = true;

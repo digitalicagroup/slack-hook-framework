@@ -99,6 +99,7 @@ class SlackResult extends AbstractArray {
 	public function __construct() {
 		parent::__construct ();
 		$this->a [R_MRKDWN] = true;
+		$this->a [R_ATT] = array ();
 	}
 	public function setText($text) {
 		$this->a [R_TEXT] = $text;
@@ -113,7 +114,7 @@ class SlackResult extends AbstractArray {
 		$this->a [R_CHANNEL] = $channel;
 	}
 	public function getAttachmentsArray() {
-		return $this->a[R_ATT];
+		return $this->a [R_ATT];
 	}
 }
 
