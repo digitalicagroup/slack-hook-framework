@@ -142,14 +142,11 @@ abstract class AbstractCommand {
 	}
 	
 	/**
-	 * Adds the parameter to the SlackResultAttachment array of this command's
-	 * internal SlackResult.
-	 *
-	 * @param SlackResultAttachment $att        	
+	 * Sets the attachments array for this result.
+	 * @param SlackResultAttachment[] $attachments
 	 */
-	protected function addSlackResultAttachment($att) {
-		$atts = $this->result->getAttachmentsArray ();
-		$atts [] = $att;
+	protected function setSlackResultAttachments($attachments) {
+		$this->result->setAttachmentsArray($attachments);
 	}
 	
 	/**

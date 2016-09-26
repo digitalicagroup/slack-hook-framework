@@ -11,8 +11,7 @@ namespace SlackHookFramework;
  */
 class CmdUnknown extends AbstractCommand {
 	protected function executeImpl() {
-		$result = new SlackResult ();
-		$result->setText ( 'Unknown Command' );
+		$this->setResultText ( 'Unknown Command' );
 		$this->log->debug ( "CmdUnknown: Executing CmdUnknown" );
 		return $result;
 	}

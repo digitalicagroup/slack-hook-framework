@@ -52,7 +52,7 @@ class CommandFactory {
 		if (self::$commands == null || self::$help_data == null) {
 			self::reloadDefinitions ( $config );
 		}
-		self::$log->debug ( "Raw post: " . $post );
+		self::$log->debug ( "Raw post: " . implode ( " ", $post ) );
 		
 		// TODO move strings parameter 'text' to global definition
 		if (isset ( $post ['text'] ) && self::$commands != null) {
@@ -64,7 +64,7 @@ class CommandFactory {
 			array_shift ( $input );
 			if (in_array ( $command_string, array_keys ( self::$commands ) )) {
 				$class = self::$commands [$command_string] ["class"];
-				if (isset ( self::$commands [$command_string] ["split_regexp"] )) {
+				if (array_key_exists ( "split_regexp", self::$commands [$command_string] )) {
 					$split_regexp = self::$commands [$command_string] ["split_regexp"];
 					$input = preg_split ( $split_regexp, implode ( " ", $input ) );
 				}
@@ -108,7 +108,7 @@ class CommandFactory {
 			}
 			foreach ( $json ["commands"] as $command ) {
 				self::$commands [$command ["trigger"]] ["class"] = $command ["class"];
-				if (isset ( $command ["split_regexp"] )) {
+				if (array_key_exists ( "split_regexp", $command )) {
 					self::$commands [$command ["trigger"]] ["split_regexp"] = $command ["split_regexp"];
 				}
 				self::$help_data [$command ["help_title"]] = $command ["help_text"];

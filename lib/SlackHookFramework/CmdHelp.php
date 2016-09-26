@@ -12,8 +12,7 @@ namespace SlackHookFramework;
 class CmdHelp extends AbstractCommand {
 	protected function executeImpl() {
 		$log = $this->log;
-		$result = new SlackResult ();
-		$result->setText ( "Help" );
+		$this->setResultText ( "Help" );
 		$att = new SlackResultAttachment ();
 		$att->setTitle ( "Available Commands:" );
 		$att->setFallback ( "Available Commands:" );
@@ -33,7 +32,7 @@ class CmdHelp extends AbstractCommand {
 				"compare" 
 		) );
 		$att->setFieldsArray ( $fields );
-		$result->setAttachmentsArray ( array (
+		$this->setSlackResultAttachments ( array (
 				$att 
 		) );
 		return $result;

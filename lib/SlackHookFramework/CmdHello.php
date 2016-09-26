@@ -35,11 +35,6 @@ class CmdHello extends AbstractCommand {
 		$log = $this->log;
 		
 		/**
-		 * Create a new instance to store results.
-		 */
-		$result = new SlackResult ();
-		
-		/**
 		 * Output some debug info to log file.
 		 */
 		$log->debug ( "CmdHello: Parameters received: " . implode ( ",", $this->cmd ) );
@@ -89,8 +84,8 @@ class CmdHello extends AbstractCommand {
 			$attachments [] = $attachment;
 		}
 		
-		$result->setText ( $resultText );
-		$result->setAttachmentsArray ( $attachments );
+		$this->setResultText ( $resultText );
+		$this->setSlackResultAttachments ( $attachments );
 		return $result;
 	}
 }
