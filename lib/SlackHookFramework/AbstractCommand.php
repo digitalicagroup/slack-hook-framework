@@ -79,8 +79,11 @@ abstract class AbstractCommand {
 	/**
 	 * Function to be implemented by command subclasses.
 	 * Should return a proper instance of SlackResult class.
+	 *
+	 * @param String[] $params
+	 *        	Parsed parameters for the current command.
 	 */
-	abstract protected function executeImpl();
+	abstract protected function executeImpl($params);
 	
 	/**
 	 * Executes this command, and returns a new SlackResult instance.
@@ -90,7 +93,7 @@ abstract class AbstractCommand {
 	 */
 	public function execute() {
 		$this->log->debug ( "AbstractCommand (" . get_class ( $this ) . "): command array: {" . implode ( ",", $this->cmd ) . "}" );
-		$this->executeImpl ();
+		$this->executeImpl ( $this->cmd );
 		
 		if ($this->response_to_source_channel) {
 			$this->log->debug ( "AbstractCommand (" . get_class ( $this ) . "): requesting channel name for channel: " . $this->post ["channel_id"] );
@@ -135,7 +138,7 @@ abstract class AbstractCommand {
 	/**
 	 * Overrides the entire result of this command.
 	 *
-	 * @param SlackResult $result        	
+	 * @param \SlackHookFramework\SlackResult $result        	
 	 */
 	protected function setSlackResult($result) {
 		$this->result = $result;
@@ -143,10 +146,11 @@ abstract class AbstractCommand {
 	
 	/**
 	 * Sets the attachments array for this result.
-	 * @param SlackResultAttachment[] $attachments
+	 *
+	 * @param \SlackHookFramework\SlackResultAttachment[] $attachments        	
 	 */
 	protected function setSlackResultAttachments($attachments) {
-		$this->result->setAttachmentsArray($attachments);
+		$this->result->setAttachmentsArray ( $attachments );
 	}
 	
 	/**

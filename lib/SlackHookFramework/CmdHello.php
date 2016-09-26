@@ -28,7 +28,7 @@ class CmdHello extends AbstractCommand {
 	 * @see \SlackHookFramework\AbstractCommand::executeImpl()
 	 * @return \SlackHookFramework\SlackResult
 	 */
-	protected function executeImpl() {
+	protected function executeImpl($params) {
 		/**
 		 * Get a reference to the log.
 		 */
@@ -37,13 +37,13 @@ class CmdHello extends AbstractCommand {
 		/**
 		 * Output some debug info to log file.
 		 */
-		$log->debug ( "CmdHello: Parameters received: " . implode ( ",", $this->cmd ) );
+		$log->debug ( "CmdHello: Parameters received: " . implode ( ",", $params ) );
 		
 		/**
 		 * Preparing the result text and validating parameters.
 		 */
 		$resultText = "[requested by " . $this->post ["user_name"] . "]";
-		if (empty ( $this->cmd )) {
+		if (empty ( $params )) {
 			$resultText .= " You must specify at least one parameter!";
 		} else {
 			$resultText .= " CmdHello Result: ";
@@ -57,7 +57,7 @@ class CmdHello extends AbstractCommand {
 		/**
 		 * Cycling through parameters, just for fun.
 		 */
-		foreach ( $this->cmd as $param ) {
+		foreach ( $params as $param ) {
 			$log->debug ( "CmdHello: processing parameter $param" );
 			
 			/**
