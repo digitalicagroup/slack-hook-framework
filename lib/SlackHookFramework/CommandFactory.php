@@ -52,6 +52,8 @@ class CommandFactory {
 		if (self::$commands == null || self::$help_data == null) {
 			self::reloadDefinitions ( $config );
 		}
+		self::$log->debug("Raw post: ". $post);
+		
 		// TODO move strings parameter 'text' to global definition
 		if (isset ( $post ['text'] ) && self::$commands != null) {
 			self::$log->debug ( "CommandFactory: text received: " . $post ['text'] );
