@@ -73,8 +73,7 @@ class CmdHello extends AbstractCommand {
 			 * Adding some fields to the attachment.
 			 */
 			$fields = array ();
-			$fields [] = SlackResultAttachmentField::withAttributes ( "Field 1", "Value" );
-			$fields [] = SlackResultAttachmentField::withAttributes ( "Field 2", "Value" );
+			$fields [] = SlackResultAttachmentField::withAttributes ( "Short Field", "Short Field Value" );
 			$fields [] = SlackResultAttachmentField::withAttributes ( "This is a long field", "this is a long Value", FALSE );
 			$attachment->setFieldsArray ( $fields );
 			

@@ -52,7 +52,7 @@ class CommandFactory {
 		if (self::$commands == null || self::$help_data == null) {
 			self::reloadDefinitions ( $config );
 		}
-		self::$log->debug ( "Raw post: " . implode ( " ", $post ) );
+		self::$log->debug ( "Raw post (csv): " . implode ( ",", $post ) );
 		
 		// TODO move strings parameter 'text' to global definition
 		if (isset ( $post ['text'] ) && self::$commands != null) {
@@ -97,6 +97,10 @@ class CommandFactory {
 		} else {
 			self::$log->warning ( "CommandFactory: Warning . Could not load custom commands from $filename, check json format or file permissions." );
 		}
+		
+		self::$log->debug ( "CommandFactory: Loaded " . count ( self::$commands ) . " commands." );
+		$commandKeys = array_keys ( self::$commands );
+		self::$log->debug ( "CommandFactory: Available commands: " . implode ( ", ", $commandKeys ) );
 	}
 	protected static function reloadFileDefinitions($file, $clean_previous = TRUE) {
 		$result = false;
@@ -107,6 +111,7 @@ class CommandFactory {
 				self::$help_data = array ();
 			}
 			foreach ( $json ["commands"] as $command ) {
+				self::$log->debug ( "CommandFactory: Parsing command: " . implode ( ", ", $command ) );
 				self::$commands [$command ["trigger"]] ["class"] = $command ["class"];
 				if (array_key_exists ( "split_regexp", $command )) {
 					self::$commands [$command ["trigger"]] ["split_regexp"] = $command ["split_regexp"];

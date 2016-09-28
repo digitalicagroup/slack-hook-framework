@@ -1,8 +1,8 @@
 # Slack Hook Framework
 
-A simple framework to build your own command processor for Slack.
+A simple framework to easily build your own command processor for Slack.
 It can be extended in two ways:
-* Creating another project and using composer to install the framework as a library.
+* (recommended) Creating another project and using composer to install the framework as a library.
  * See [slack-bot](https://github.com/digitalicagroup/slack-bot) for an example of what can be done.
 * Install the framework and start adding new commands right away.
 
@@ -13,22 +13,30 @@ Uses
 How does it work?
 * It installs as a PHP application on your web server.
 * Through a "Slash Commands" Slack integration, it receives requests.
-* Posts the results to an "Incoming WebHooks" Slack integration in the originator's channel or private group (yeah, private group!).
+* It parses the text received, detects which command to use, and forward the parameters.
+* Posts the results to an "Incoming WebHooks" Slack integration in the originator's channel or private group (yeah, private group! The framework makes use of slack api to look up channel info).
 
 ## Current Features
 * Commands supported:
  * help: Shows help info about other commands. It gathers information from custom_cmds.json (file for user defined commands).
  * hello: Example command that shows what can be done with the framework.
+* Slack token validation to restrict access from one slack domain.
+* Custom commands can be added easily (see Adding more Commands).
+* Custom reg-exp configuration for parameter parsing for each command.
+
+### TODO
+* Make an incorporated "Add to Slack" to use OAuth 2.0 on client applications.
  
 ## Requirements
 
 * PHP >= 5.4 with cURL extension,
-* Slack integrations (see install).
+* Slack integrations (see install),
+* Composer (for easy install).
 
 ## Install
 Just add the dependency for slack-hook-framework or run:
 ```bash
-$ php composer.phar require digitalicagroup/slack-hook-framework:~0.1
+$ php composer.phar require digitalicagroup/slack-hook-framework:~0.2
 $ cp vendor/digitalicagroup/slack-hook-framework/index-example.php .
 $ cp vendor/digitalicagroup/slack-hook-framework/custom_cmds.json .
 ```
@@ -39,7 +47,7 @@ The customs_cmds.json will let you define new commands of your own. You can chec
 ### On Slack
 
 * Create a new "Slash Commands" integration with the following data:
- * Command: /test (or whatever you like)
+ * Command: /bot (or whatever you like)
  * URL: the URL pointing to the index.php (or index-example.php) of your slack-hook-framework install
  * Method: POST
  * Token: copy this token, we'll need it later.
@@ -49,7 +57,7 @@ The customs_cmds.json will let you define new commands of your own. You can chec
  * Webhook URL: copy this URL, we'll need it later.
  * Descriptive Label, Customize Name, Customize Icon: whatever you like.
 
-* Go to [Slack API](https://api.slack.com/) and copy the authentication token for your team. The framework needs this because:
+* Go to [Slack API](https://api.slack.com/) > "Authentication" > "Tokens for Testing" and generate a test token for your team. The framework needs this because:
  * When a command is received from Slack (in a private group), the payload does not have the private group name.
  * It needs to make a request to the Slack API in order to search for the group name.
  * If the authentication token have the rights to access that group, the framework will be able to post to it.
@@ -90,19 +98,19 @@ $config->slack_api_token =    "xoxp-98475983759834-38475984579843-34985793845";
 /**
  * logs folder, make sure the invoker have write permission.
  */
-$config->log_dir =            "/srv/api/slack-hook-framework/logs";
+$config->log_dir =            __DIR__."/logs";
 
 /**
  * Database folder, used by some commands to store user related temporal information.
  * Make sure the invoker have write permission.
  */
-$config->db_dir = "/srv/api/slack-hook-framework/db";
+$config->db_dir = __DIR__."/db";
 
 /**
  * Custom commands definition. Use this file if you wish to add new commands to be
  * recognized by the framework.
  */
-$config->custom_cmds = "/srv/api/slack-hook-framework/custom_cmds.json";
+$config->custom_cmds = __DIR__."/custom_cmds.json";
 ```
 
 Give permissions to your logs/ and db/ folder to your web server process. If you are using apache under linux, it is usually www-data:
@@ -113,7 +121,7 @@ $ sudo chmod g+w logs/
 $ sudo chmod g+w db/
 ```
 
-Go to slack and type `/test help`.
+Go to slack and type `/bot help`.
 
 ## Adding more Commands.
 
@@ -146,6 +154,7 @@ This is a list of common errors:
 
 ## About Digitalica
 
-We are a small firm focusing on mobile apps development (iOS, Android) and we are passionate about new technologies and ways that helps us work better.
+We are a small firm focusing on mobile apps development (iOS, Android) and we are passionate about new technologies and ways that helps us work better. This project is an extension of our work to test and play with new things.
 * This project homepage: [slack-hook-framework](https://github.com/digitalicagroup/slack-hook-framework)
 * Digitalica homepage: [digitalicagroup.com](http://digitalicagroup.com)
+* Our Engineering Team Blog: [blog.digitalicagroup.com](http://blog.digitalicagroup.com)

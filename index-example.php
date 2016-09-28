@@ -38,23 +38,23 @@ $config->slack_api_token = "xoxp-98475983759834-38475984579843-34985793845";
 /**
  * logs folder, make sure the invoker(*) have write permission.
  */
-$config->log_dir = "/srv/api/slack-hook-framework/logs";
+$config->log_dir = __DIR__."/logs";
 
 /**
  * Database folder, used by some commands to store user related temporal information.
  * Make sure the invoker(*) have write permission.
  */
-$config->db_dir = "/srv/api/slack-hook-framework/db";
+$config->db_dir = __DIR__."/db";
 
 /**
  * Custom commands definition. Use this file if you wish to add new commands to be
  * recognized by the framework.
  */
-$config->custom_cmds = "/srv/api/slack-hook-framework/custom_cmds.json";
+$config->custom_cmds = __DIR__."/custom_cmds.json";
 
 /**
- * This is to prevent redmine-command entry point to be called outside slack.
- * It will validate the slack token.
+ * This is to prevent the entry point to be called outside slack.
+ * It will validate the slack token in the request.
  */
 if (! SlackHookFramework\Validator::validate ( $_POST, $config )) {
 	die ();

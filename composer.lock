@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad0a186948b79b11d62573a030d06b2c",
+    "hash": "4054ddebf449195434ccc24485dbf7b5",
+    "content-hash": "cb2fa867bde01b5cee243f8f67b04b8c",
     "packages": [
         {
             "name": "katzgrau/klogger",
