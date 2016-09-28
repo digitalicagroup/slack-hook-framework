@@ -35,6 +35,5 @@ class CmdHelp extends AbstractCommand {
 		$this->setSlackResultAttachments ( array (
 				$att 
 		) );
-		return $result;
 	}
 }

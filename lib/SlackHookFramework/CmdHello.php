@@ -86,6 +86,5 @@ class CmdHello extends AbstractCommand {
 		
 		$this->setResultText ( $resultText );
 		$this->setSlackResultAttachments ( $attachments );
-		return $result;
 	}
 }
