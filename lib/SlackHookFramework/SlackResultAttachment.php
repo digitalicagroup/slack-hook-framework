@@ -16,7 +16,8 @@ class SlackResultAttachment extends AbstractArray {
 				SlackResult::R_TEXT,
 				SlackResult::R_TITLE,
 				SlackResult::R_FALLBACK,
-				SlackResult::R_FIELDS 
+				SlackResult::R_FIELDS,
+				SlackResult::R_COLOR
 		);
 	}
 	public function setTitle($title) {
@@ -39,6 +40,9 @@ class SlackResultAttachment extends AbstractArray {
 	}
 	public function setFieldsArray($fields) {
 		$this->setArray ( SlackResult::R_FIELDS, $fields );
+	}
+	public function setColor($color) {
+		$this->a [SlackResult::R_COLOR] = $color;
 	}
 }
 

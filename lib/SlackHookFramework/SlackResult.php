@@ -26,6 +26,7 @@ class SlackResult extends AbstractArray {
 	const R_FIELDS = 'fields';
 	const R_VALUE = 'value';
 	const R_SHORT = 'short';
+	const R_COLOR = 'color';
 	
 	public function __construct() {
 		parent::__construct ();
