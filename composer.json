@@ -1,30 +1,32 @@
 {
-    "name": "digitalicagroup/slack-hook-framework",
-    "description": "Framework to easily create your own command processor for Slack",
-    "homepage": "https://github.com/digitalicagroup/slack-hook-framework",
-    "type": "library",
-    "require": {
-        "php": ">=5.4",
-        "ext-curl": "*",
-        "katzgrau/klogger": "1.0.*"
-    },
-    "license": "GPL-3.0+",
-    "authors": [
-        {
-            "name": "Luis Augusto PeÒa Pereira",
-            "email": "luis@digitalicagroup.com"
-        }
-    ],
-    "autoload": {
-      "psr-4": {
-        "SlackHookFramework\\": "lib/"
-      },
-      "classmap": ["lib/"]
-    },
-    "scripts": {
-        "post-update-cmd": [
-        	"php -r \"copy('vendor/digitalicagroup/slack-hook-framework/custom_cmds.json', 'custom_cmds.json');\"",
-        	"php -r \"copy('vendor/digitalicagroup/slack-hook-framework/index-example.php', 'index-example.php');\""
-        ]
-    }
+	"name": "digitalicagroup/slack-hook-framework",
+	"description": "Framework to easily create your own command processor for Slack",
+	"homepage": "https://github.com/digitalicagroup/slack-hook-framework",
+	"type": "library",
+	"require": {
+		"php": ">=5.4",
+		"ext-curl": "*",
+		"katzgrau/klogger": "1.0.*"
+	},
+	"license": "GPL-3.0+",
+	"authors": [
+		{
+			"name": "Luis Augusto Pe√±a Pereira",
+			"email": "luis@digitalicagroup.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"SlackHookFramework\\": "lib/"
+		},
+		"classmap": [
+			"lib/"
+		]
+	},
+	"scripts": {
+		"post-update-cmd": [
+			"php -r \"copy('vendor/digitalicagroup/slack-hook-framework/custom_cmds.json', 'custom_cmds.json');\"",
+			"php -r \"copy('vendor/digitalicagroup/slack-hook-framework/index-example.php', 'index-example.php');\""
+		]
+	}
 }

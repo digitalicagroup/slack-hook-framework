@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
  * Aditional command classes must extend AbstractCommand and be
  * added to commands_definition.json
  *
- * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
+ * @author Luis Augusto PeÃ±a Pereira <luis at digitalicagroup dot com>
  *        
  */
 class CommandFactory {

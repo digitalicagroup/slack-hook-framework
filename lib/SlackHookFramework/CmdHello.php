@@ -5,7 +5,7 @@ namespace SlackHookFramework;
 /**
  * Class to show usage of the slack-hook-framework.
  *
- * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
+ * @author Luis Augusto PeÃ±a Pereira <luis at digitalicagroup dot com>
  *        
  */
 class CmdHello extends AbstractCommand {

@@ -5,7 +5,7 @@ namespace SlackHookFramework;
 /**
  * Class to be used as an attachment in a message to slack.
  *
- * @author Luis Augusto Peña Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto PeÃ±a Pereira <luis at digitalicagroup dot com>
  *        
  */
 class SlackResultAttachment extends AbstractArray {
@@ -17,7 +17,7 @@ class SlackResultAttachment extends AbstractArray {
 				SlackResult::R_TITLE,
 				SlackResult::R_FALLBACK,
 				SlackResult::R_FIELDS,
-				SlackResult::R_COLOR
+				SlackResult::R_COLOR 
 		);
 	}
 	public function setTitle($title) {

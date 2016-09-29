@@ -7,7 +7,7 @@ use Katzgrau\KLogger\Logger;
 /**
  * Class to store utility methods.
  *
- * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
+ * @author Luis Augusto PeÃ±a Pereira <luis at digitalicagroup dot com>
  *        
  */
 class Util {

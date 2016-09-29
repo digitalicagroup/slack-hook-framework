@@ -173,3 +173,4 @@ We are a small firm focusing on mobile apps development (iOS, Android) and we ar
 * This project homepage: [slack-hook-framework](https://github.com/digitalicagroup/slack-hook-framework)
 * Digitalica homepage: [digitalicagroup.com](http://digitalicagroup.com)
 * Our Engineering Team Blog: [blog.digitalicagroup.com](http://blog.digitalicagroup.com)
+

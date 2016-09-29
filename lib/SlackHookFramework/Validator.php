@@ -7,7 +7,7 @@ use Katzgrau\KLogger\Logger;
 /**
  * Class to be used in the verification of a slack request.
  *
- * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
+ * @author Luis Augusto PeÃ±a Pereira <luis at digitalicagroup dot com>
  *        
  */
 class Validator {

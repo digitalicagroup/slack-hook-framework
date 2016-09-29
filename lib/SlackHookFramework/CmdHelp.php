@@ -6,7 +6,7 @@ namespace SlackHookFramework;
  * Class to parse help data (loaded by CommandFactory) into a SlackResult instance
  * containing all available commands into fields of a single attachment.
  *
- * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
+ * @author Luis Augusto PeÃ±a Pereira <luis at digitalicagroup dot com>
  *        
  */
 class CmdHelp extends AbstractCommand {

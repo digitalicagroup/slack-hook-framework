@@ -5,7 +5,7 @@ namespace SlackHookFramework;
 /**
  * Class to be used as field in an attachment.
  *
- * @author Luis Augusto Peña Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
  *        
  */
 class SlackResultAttachmentField extends AbstractArray {

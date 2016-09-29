@@ -6,7 +6,6 @@ use Psr\Log\LogLevel;
 
 define ( 'URL_CHANNELS_INFO', "https://slack.com/api/channels.info" );
 define ( 'URL_GROUPS_LIST', "https://slack.com/api/groups.list" );
-
 class Configuration {
 	public $token;
 	public $slack_webhook_url;

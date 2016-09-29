@@ -11,7 +11,7 @@ namespace SlackHookFramework;
  * In a SlackResultAttachment, an array of SlackResultAttachmentField
  * can be stored to represent "fields" in the given attachment of a message to slack.
  *
- * @author Luis Augusto Peña Pereira <lpenap at gmail dot com>
+ * @author Luis Augusto PeÃ±a Pereira <lpenap at gmail dot com>
  *        
  */
 class SlackResult extends AbstractArray {
@@ -27,7 +27,6 @@ class SlackResult extends AbstractArray {
 	const R_VALUE = 'value';
 	const R_SHORT = 'short';
 	const R_COLOR = 'color';
-	
 	public function __construct() {
 		parent::__construct ();
 		$this->a [self::R_MRKDWN] = true;
@@ -39,7 +38,7 @@ class SlackResult extends AbstractArray {
 		$this->a [self::R_MRKDWN] = $mrkdwn;
 	}
 	public function setAttachmentsArray($att) {
-		$this->setArray (self::R_ATT, $att );
+		$this->setArray ( self::R_ATT, $att );
 	}
 	public function setChannel($channel) {
 		$this->a [self::R_CHANNEL] = $channel;

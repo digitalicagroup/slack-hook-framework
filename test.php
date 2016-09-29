@@ -5,9 +5,9 @@ $config = new SlackHookFramework\Configuration ();
 $config->token = "TTTTTTTTTTTTTTTTT";
 $config->slack_webhook_url = "https://hooks.slack.com/services/XXX/YYY/zzzzzzzzzzzz";
 $config->slack_api_token = "xoxp-XXXXXX";
-$config->log_dir = __DIR__."/logs";
-$config->db_dir = __DIR__."/db";
-$config->custom_cmds = __DIR__."/custom_cmds.json";
+$config->log_dir = __DIR__ . "/logs";
+$config->db_dir = __DIR__ . "/db";
+$config->custom_cmds = __DIR__ . "/custom_cmds.json";
 
 $post = array ();
 $post ['text'] = "hello first second thrid";

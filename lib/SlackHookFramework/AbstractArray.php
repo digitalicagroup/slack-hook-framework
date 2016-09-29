@@ -5,7 +5,7 @@ namespace SlackHookFramework;
 /**
  * Abstract wrapper class for an array.
  *
- * @author Luis Augusto Peña Pereira <luis at digitalicagroup dot com>
+ * @author Luis Augusto PeÃ±a Pereira <luis at digitalicagroup dot com>
  *        
  */
 abstract class AbstractArray {
