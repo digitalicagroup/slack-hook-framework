@@ -36,7 +36,7 @@ How does it work?
 ## Install
 Just add the dependency for slack-hook-framework or run:
 ```bash
-$ php composer.phar require digitalicagroup/slack-hook-framework:~0.2
+$ php composer.phar require digitalicagroup/slack-hook-framework:~0.3
 $ cp vendor/digitalicagroup/slack-hook-framework/index-example.php .
 $ cp vendor/digitalicagroup/slack-hook-framework/custom_cmds.json .
 ```
@@ -66,7 +66,7 @@ The customs_cmds.json will let you define new commands of your own. You can chec
 
 Install [composer](http://getcomposer.org/download/) in a folder of your preference (should be accessible from your web server) then run:
 ```bash
-$ php composer.phar require digitalicagroup/slack-hook-framework:~0.2
+$ php composer.phar require digitalicagroup/slack-hook-framework:~0.3
 $ cp vendor/digitalicagroup/slack-hook-framework/index-example.php .
 $ cp vendor/digitalicagroup/slack-hook-framework/custom_cmds.json .
 ```
