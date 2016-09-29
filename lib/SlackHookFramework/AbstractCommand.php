@@ -78,7 +78,6 @@ abstract class AbstractCommand {
 	
 	/**
 	 * Function to be implemented by command subclasses.
-	 * Should return a proper instance of SlackResult class.
 	 *
 	 * @param String[] $params
 	 *        	Parsed parameters for the current command.

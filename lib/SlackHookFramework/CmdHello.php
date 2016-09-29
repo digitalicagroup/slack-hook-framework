@@ -11,20 +11,32 @@ namespace SlackHookFramework;
 class CmdHello extends AbstractCommand {
 	
 	/**
-	 * Factory method to be implemented from \SlackHookFramework\AbstractCommand .
-	 * Must return an instance of \SlackHookFramework\SlackResult .
+	 * Factory method to be implemented from \SlackHookFramework\AbstractCommand.
 	 *
-	 * Basically, the method returns an instance of SlackResult.
-	 * Inside a single instance of SlackResult, several
-	 * SlackResultAttachment instances can be stored.
-	 * Inside a SlackResultAttachment instance, several
-	 * SlackResultAttachmentField instances can be stored.
-	 * The result is then formating according to the Slack
-	 * formating guide.
+	 * This method should execute your command's logic.
 	 *
-	 * So you must process your command here, and then
-	 * prepare your SlackResult instance.
+	 * There are several ways to return information to Slack:
 	 *
+	 * 1) Simply use $this->setResultText("string here"); to return a single
+	 * line to slack.
+	 *
+	 * 2) Create an array with one or more instances of SlackResultAttachment
+	 * with relevant information and formatting options. Add this array using
+	 * $this->setSlackResultAttachments(myArray); .
+	 *
+	 * 3) Add an array with one or more instances of SlackResultAttachmentField
+	 * to each one of your attachments to include even more detailed information.
+	 *
+	 * 4) Complete override the internal reference $this->result with your
+	 * own SlackResult instance if you want more control over your result.
+	 *
+	 * @param String[] $params
+	 *        	An array of strings with the parameters already
+	 *        	parsed for your command (without the command trigger). If you didn't
+	 *        	defined a split_regexp field in your custom_cmds.json, the paramters
+	 *        	are parsed by one or consecutive space characters after detecting
+	 *        	your command trigger.
+	 *        	
 	 * @see \SlackHookFramework\AbstractCommand::executeImpl()
 	 * @return \SlackHookFramework\SlackResult
 	 */
@@ -68,6 +80,7 @@ class CmdHello extends AbstractCommand {
 			$attachment->setText ( "Hello $param !!" );
 			$attachment->setFallback ( "fallback text." );
 			$attachment->setPretext ( "pretext here." );
+			$attachment->setColor ( "#00ff00" );
 			
 			/**
 			 * Adding some fields to the attachment.
@@ -85,5 +98,10 @@ class CmdHello extends AbstractCommand {
 		
 		$this->setResultText ( $resultText );
 		$this->setSlackResultAttachments ( $attachments );
+	
+	/**
+	 * If you want more control, you can create your own instance of
+	 * SlackResult and override $this->result with your own object.
+	 */
 	}
 }

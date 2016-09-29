@@ -14,7 +14,7 @@ How does it work?
 * It installs as a PHP application on your web server.
 * Through a "Slash Commands" Slack integration, it receives requests.
 * It parses the text received, detects which command to use, and forward the parameters.
-* Posts the results to an "Incoming WebHooks" Slack integration in the originator's channel or private group (yeah, private group! The framework makes use of slack api to look up channel info).
+* Posts the results to an "Incoming WebHooks" Slack integration in the originator's channel or private group (The framework makes use of slack api to look up channel info).
 
 ## Current Features
 * Commands supported:
@@ -31,7 +31,7 @@ How does it work?
 
 * PHP >= 5.4 with cURL extension,
 * Slack integrations (see install),
-* Composer (for easy install).
+* [Composer](http://getcomposer.org/download/).
 
 ## Install
 Just add the dependency for slack-hook-framework or run:
@@ -66,7 +66,7 @@ The customs_cmds.json will let you define new commands of your own. You can chec
 
 Install [composer](http://getcomposer.org/download/) in a folder of your preference (should be accessible from your web server) then run:
 ```bash
-$ php composer.phar require digitalicagroup/slack-hook-framework:~0.1
+$ php composer.phar require digitalicagroup/slack-hook-framework:~0.2
 $ cp vendor/digitalicagroup/slack-hook-framework/index-example.php .
 $ cp vendor/digitalicagroup/slack-hook-framework/custom_cmds.json .
 ```
@@ -75,34 +75,49 @@ Edit index-example.php and add the following configuration parameters:
 ```php
 /**
  * token sent by slack (from your "Slash Commands" integration).
+ * It is used by the validator to skip command processing if the request
+ * is from an unauthorized slack domain.
  */
-$config->token =              "vuLKJlkjdsflkjLKJLKJlkjd";
+$config->token = "vuLKJlkjdsflkjLKJLKJlkjd";
 
 /**
  * URL of the Incoming WebHook slack integration.
- */ 
-$config->slack_webhook_url =  "https://hooks.slack.com/services/LKJDFKLJFD/DFDFSFDDSFDS/sdlfkjdlkfjLKJLKJKLJO";
+ * Command processing results will be pushed to this URL.
+ */
+$config->slack_webhook_url = "https://hooks.slack.com/services/LKJDFKLJFD/DFDFSFDDSFDS/sdlfkjdlkfjLKJLKJKLJO";
 
 /**
- * Slack API authentication token for your team.
+ * Slack API authentication testing token for your team.
+ * We have not implemented an "Add to Slack" button yet, so a testing token
+ * must be used in the meantime.
+ * See README.md for instructions on how to get a testing token from slack.
  */
-$config->slack_api_token =    "xoxp-98475983759834-38475984579843-34985793845";
+$config->slack_api_token = "xoxp-98475983759834-38475984579843-34985793845";
 
 /**
- * Log level threshold. The default is DEBUG.
- * If you are done testing or installing in production environment,
- * uncomment this line.
+ * Log level threshold.
+ * The default is DEBUG.
+ * 
+ * Available levels:
+ * LogLevel::EMERGENCY;
+ * LogLevel::ALERT;
+ * LogLevel::CRITICAL;
+ * LogLevel::ERROR;
+ * LogLevel::WARNING;
+ * LogLevel::NOTICE;
+ * LogLevel::INFO;
+ * LogLevel::DEBUG;
  */
-//$config->log_level =           LogLevel::WARNING;
+$config->log_level = LogLevel::DEBUG;
 
 /**
- * logs folder, make sure the invoker have write permission.
+ * logs folder, make sure the invoker(*) have write permission.
  */
-$config->log_dir =            __DIR__."/logs";
+$config->log_dir = __DIR__."/logs";
 
 /**
  * Database folder, used by some commands to store user related temporal information.
- * Make sure the invoker have write permission.
+ * Make sure the invoker(*) have write permission.
  */
 $config->db_dir = __DIR__."/db";
 
@@ -131,7 +146,7 @@ $ cp vendor/digitalicagroup/slack-hook-framework/custom_cmds.json .
 ```
 * Add a definition for your new class to custom_cmds.json .
 * Check you have defined a `$config->custom_cmds` in the framework configuration (i.e. `index-example.php`).
-* Check the contents of `vendor/digitalicagroup/slack-hook-framework/lib/SlackHookFramework/CmdHello.php` to see what a command can do.
+* Check the contents of `vendor/digitalicagroup/slack-hook-framework/lib/SlackHookFramework/CmdHello.php` to see what a command can do, or check [slack-bot](https://github.com/digitalicagroup/slack-bot) for more examples.
 * run composer update (`php composer.phar update`).
 
 ## Troubleshooting
@@ -150,7 +165,7 @@ This is a list of common errors:
 * I just developed a new command but I am getting a class not found error on CommandFactory.
  * Every time you add a new command (hence a new class), you must update the composer autoloader; just type:
  * `php composer.phar update`  
-* If you have any bug or error to report, feel free to contact me:  luis at digitalicagroup.com
+* If you have any bug or error to report, feel free to contact me:  luis at digitalicagroup dot com .
 
 ## About Digitalica
 
