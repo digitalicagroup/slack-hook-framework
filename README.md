@@ -16,6 +16,11 @@ How does it work?
 * It parses the text received, detects which command to use, and forward the parameters.
 * Posts the results to an "Incoming WebHooks" Slack integration in the originator's channel or private group (The framework makes use of slack api to look up channel info).
 
+## Whats new
+* v0.3:
+ * General Cleanup.
+ * Custom reg-exp configuration for parameter parsing. Add a `"split_regexp": "/[\\s]+/"` attribute to your command definition with the regexp you want to use to parse your command's parameters. Defaults to space character(`"/[\\s]+/"`).
+
 ## Current Features
 * Commands supported:
  * help: Shows help info about other commands. It gathers information from custom_cmds.json (file for user defined commands).
